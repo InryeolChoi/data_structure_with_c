@@ -3,12 +3,12 @@
 // 생성
 s_node  *createnode(int x)
 {
-    s_node  newnode;
-    newnode = malloc(sizeof(s_node));
+    s_node  *newnode;
+    newnode = (s_node *)malloc(sizeof(s_node));
     newnode->data = x;
     newnode->next = NULL;
 
-    return (&newnode);
+    return (newnode);
 }
 
 // 소멸
@@ -25,9 +25,11 @@ void    appendnode(s_node **head, s_node *newnode)
         *head = newnode;
         return ;
     }
-    while (*head->next != 0)
-        *head = *head->next;
-    *head->next = newnode;
+
+    s_node  *tail = (*head);
+    while (tail->next != 0)
+        tail = tail->next;
+    tail->next = newnode;
 }
 
 // 탐색
@@ -44,15 +46,15 @@ s_node  *searchnode(s_node *node, int v)
 // 삭제 (특정 노드 한 개)
 void    remove_one(s_node **head, s_node *node)
 {
-    if (*head == *node)
-        *head == *head->next;
+    if (*head == node)
+        *head = node->next;
     else
     {
-        s_node current = *head;
-        while (current != NULL && current->next == *node)
+        s_node *current = *head;
+        while (current != NULL && current->next != node)
             current = current->next;
         if (current != NULL)
-            current->next = *node->next;
+            current->next = node->next;
     }
 }
 
@@ -64,13 +66,14 @@ void    insert_one(s_node *current, s_node *node)
 }
 
 // 갯수세기
-int countnode(s_node **head)
+int countnode(s_node *head)
 {
     int count = 0;
+    s_node  *current = head;
 
-    while (head->next != NULL)
+    while (current->next != NULL)
     {
-        head = head->next;
+        current = current->next;
         count++;
     }
     return (count);
