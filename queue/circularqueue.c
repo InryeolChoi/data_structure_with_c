@@ -21,7 +21,7 @@ void    destroyqueue(s_queue *queue)
     free(queue);
 }
 
-// 노드 삽입
+// 데이터 삽입
 void enqueue(s_queue *queue, int data)
 {
     int position;
@@ -37,7 +37,7 @@ void enqueue(s_queue *queue, int data)
     queue->nodes[position].data = data;
 }
 
-// 노드 제거
+// 데이터 제거
 int dequeue(s_queue *queue)
 {
     int position = queue->front;            // 제거 대상의 인덱스
