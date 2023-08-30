@@ -1,6 +1,6 @@
 NAME = binary_tree
 SRCS = bin_tree.c bin_tree_test.c
-OBJS = $(SRCS:.o=.c)
+OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
 
